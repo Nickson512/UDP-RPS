@@ -18,6 +18,8 @@ https://beej.us/guide/bgnet/source/examples/listener.c
 
 #define MAXBUFLEN 100
 
+#define BACKLOG 10 
+
 // get sockaddr, IPv4 or IPv6:
 void *get_in_addr(struct sockaddr *sa)
 {
@@ -30,7 +32,7 @@ void *get_in_addr(struct sockaddr *sa)
 
 int main(void)
 {
-	int sockfd;
+	int sockfd, new_fd;
 	struct addrinfo hints, *servinfo, *p;
 	int rv;
 	int numbytes;
@@ -40,6 +42,7 @@ int main(void)
 	char s[INET6_ADDRSTRLEN];
 	int rps, rps_c;
 	bool won;
+	int yes=1;
 
 	memset(&hints, 0, sizeof hints);
 	hints.ai_family = AF_INET6; // set to AF_INET to use IPv4
@@ -84,6 +87,8 @@ int main(void)
 	freeaddrinfo(servinfo);
 
 	printf("listener: waiting to recvfrom...\n");
+
+
 
 	addr_len = sizeof their_addr;
 	if ((numbytes = recvfrom(sockfd, buf, MAXBUFLEN-1 , 0,
