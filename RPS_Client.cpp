@@ -1,5 +1,6 @@
 /*
-** talker.c -- a datagram "client" demo
+Adapted from Beej's listener.c UDP server.
+https://beej.us/guide/bgnet/source/examples/talker.c
 */
 
 #include <stdio.h>
@@ -23,7 +24,7 @@ int main(int argc, char *argv[])
     int numbytes;
 
     if (argc != 3) {
-        fprintf(stderr,"usage: talker hostname message\n");
+        fprintf(stderr,"usage: player hostname message\n");
         exit(1);
     }
 
@@ -40,7 +41,7 @@ int main(int argc, char *argv[])
     for(p = servinfo; p != NULL; p = p->ai_next) {
         if ((sockfd = socket(p->ai_family, p->ai_socktype,
                 p->ai_protocol)) == -1) {
-            perror("talker: socket");
+            perror("Player: socket");
             continue;
         }
 
@@ -48,19 +49,19 @@ int main(int argc, char *argv[])
     }
 
     if (p == NULL) {
-        fprintf(stderr, "talker: failed to create socket\n");
+        fprintf(stderr, "Player: failed to create socket\n");
         return 2;
     }
 
     if ((numbytes = sendto(sockfd, argv[2], strlen(argv[2]), 0,
              p->ai_addr, p->ai_addrlen)) == -1) {
-        perror("talker: sendto");
+        perror("Player: sendto");
         exit(1);
     }
 
     freeaddrinfo(servinfo);
 
-    printf("player: sent %s bytes to %s\n", argv[2], argv[1]);
+    printf("Player: sent %s choice to %s\n", argv[2], argv[1]);
     close(sockfd);
 
     return 0;
