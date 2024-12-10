@@ -1,3 +1,7 @@
+/*
+** talker.c -- a datagram "client" demo
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -56,7 +60,7 @@ int main(int argc, char *argv[])
 
     freeaddrinfo(servinfo);
 
-    printf("talker: sent %d bytes to %s\n", numbytes, argv[1]);
+    printf("player: sent %s bytes to %s\n", argv[2], argv[1]);
     close(sockfd);
 
     return 0;
