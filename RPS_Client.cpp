@@ -1,5 +1,6 @@
 /*
-** talker.c -- a datagram "client" demo
+Adapted from Beej's listener.c UDP server.
+https://beej.us/guide/bgnet/source/examples/talker.c
 */
 
 #include <stdio.h>
@@ -60,7 +61,7 @@ int main(int argc, char *argv[])
 
     freeaddrinfo(servinfo);
 
-    printf("player: sent %s bytes to %s\n", argv[2], argv[1]);
+    printf("player: sent %s choice to %s\n", argv[2], argv[1]);
     close(sockfd);
 
     return 0;
