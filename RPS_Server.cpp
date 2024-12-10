@@ -41,7 +41,7 @@ int main(void)
 	socklen_t addr_len;
 	char s[INET6_ADDRSTRLEN];
 	int rps, rps_c;
-	bool won;
+	bool won = false;
 	int yes=1;
 
 	memset(&hints, 0, sizeof hints);
@@ -106,18 +106,24 @@ int main(void)
 	printf("listener: packet contains \"%s\"\n", buf);
 
 	//Convert to integer
-	if (strcmp(buf,"rock")){
+	printf("Packet resolved to ");
+	if (!strcmp(buf,"rock")){
 		rps_c = 1;
+		printf("rock.");
 	}
-	else if (strcmp(buf,"paper")){
+	else if (!strcmp(buf,"paper")){
 		rps_c = 2;
+		printf("paper.");
 	}
-	else if (strcmp(buf,"scissors")){
+	else if (!strcmp(buf,"scissors")){
 		rps_c = 3;
+		printf("scissors.");
 	}
 	else {
 		rps_c = 4; //invalid string received
+		printf("an invalid move!!");
 	}
+	printf("\n");
 
 	if (rps_c == rps) {
 		printf("You tied!\n");
