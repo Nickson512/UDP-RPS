@@ -1,6 +1,11 @@
 /*
 Adapted from Beej's listener.c UDP server.
 https://beej.us/guide/bgnet/source/examples/listener.c
+
+We chose UDP because there's no need to worry about more than one RPS move being sent
+within a short time. In other words, there's no reason to worry about out or order packets.
+Also our packets would never be large enough to require fragmentation over multiple TCP packets.
+
 */
 
 #include <stdio.h>
